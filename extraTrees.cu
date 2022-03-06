@@ -120,9 +120,9 @@ void read_csv_iris(float *data, float *label, int row_count, char *filename){
 void read_csv(float *data, float *label, int row_count, char *filename){
   FILE *fp = fopen(filename,"r");
   size_t len = 0;
-  char *line = NULL;
-  getline (&line, &len, fp);
-  printf("%s", line);
+  char line[32];
+  //fgets (line, 32, fp);
+  //printf("%s", line);
   assert(false);
 }
 
