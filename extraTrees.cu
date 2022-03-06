@@ -859,7 +859,23 @@ int main(int argc, char * argv[]){
 		strncpy(file_test_set,"data/iris_test.data",50);
 		read_csv_iris(dataset_train,labels_train,TRAIN_NUM,file_train_set);
 		read_csv_iris(dataset_test,labels_test,TEST_NUM,file_test_set);
+
+	}else if(mnist_iris == 2){
+		TRAIN_NUM = 160000;
+		TEST_NUM = 40000;
+		FEATURE =  4;
+		NUMBER_OF_CLASSES = 3;
+
+		dataset_train = (float *)malloc(FEATURE * TRAIN_NUM*sizeof(float));
+		labels_train = (float *)malloc(TRAIN_NUM*sizeof(float));
+		dataset_test = (float *)malloc(FEATURE * TEST_NUM*sizeof(float));
+		labels_test = (float *)malloc(TEST_NUM*sizeof(float));
+		strncpy(file_train_set, "data/iris_train.data",50);
+		strncpy(file_test_set,"data/iris_test.data",50);
+		read_csv_iris(dataset_train,labels_train,TRAIN_NUM,file_train_set);
+		read_csv_iris(dataset_test,labels_test,TEST_NUM,file_test_set);
 	}
+
 
 	float *dataset_train_T;
 	dataset_train_T = (float *)malloc(TRAIN_NUM * FEATURE * sizeof(float));
