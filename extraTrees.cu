@@ -199,9 +199,6 @@ void read_csv(float *data, float *label, int n_features, char *filename){
     charsRead = getline (&line, &len, fp);
     i++;
   }
-  printf("read %d lines\n", i);
-  printf("%s", line);
-  assert(false);
 }
 
 void readData(float* dataset,float*labels,const char* dataPath,const char*labelPath)
