@@ -117,7 +117,12 @@ void read_csv_iris(float *data, float *label, int row_count, char *filename){
 } 
 
 
-
+void read_csv(){
+  FILE *f;
+  char **lineptr;
+  size_t *n;
+  getline (lineptr, n, f);
+}
 
 void readData(float* dataset,float*labels,const char* dataPath,const char*labelPath)
 {
