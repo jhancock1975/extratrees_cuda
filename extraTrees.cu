@@ -125,7 +125,7 @@ void read_csv(float *data, float *label, int row_count, char *filename){
   int charsRead = 0;
   charsRead = getline (&line, &len, fp);
   int i = 0;
-  char *delim = ","; // assume file separated by commas
+  string delim = ","; // assume file separated by commas
   float curFloat; // holds current floating point number read from file
   while (charsRead > 0){
     // according to man page, should free buffer read
