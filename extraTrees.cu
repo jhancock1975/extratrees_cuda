@@ -119,10 +119,11 @@ void read_csv_iris(float *data, float *label, int row_count, char *filename){
 
 void read_csv(float *data, float *label, int row_count, char *filename){
   FILE *fp = fopen(filename,"r");
+  assert(fp != NULL, "read_csv unable to open input file")
   size_t len = 0;
   char *line = NULL;
   getline (&line, &len, fp);
-  printf("%s\n", line);
+  printf("%s", line);
   assert(false);
 }
 
