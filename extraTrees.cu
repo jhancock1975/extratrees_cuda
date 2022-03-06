@@ -124,7 +124,7 @@ void read_csv_iris(float *data, float *label, int row_count, char *filename){
  */
 int get_num_features(char *filename){
   FILE *fp = fopen(filename, "r");
-  char *line = NULL, *s = (char *)malloc(sizeof(char));
+  char *line = NULL;
   size_t len = 0;
   int result = 0;
   char delim[] = ","; // assume file separated by commas
@@ -132,11 +132,9 @@ int get_num_features(char *filename){
   char *ptr = strtok(line, delim);
   while (ptr != NULL){
     ptr = strtok(NULL, delim);
-    sscanf(ptr, "%s", &s);
     result++;
   }
   free(line);
-  free(s);
   return result;
 }
 
