@@ -914,7 +914,7 @@ int main(int argc, char * argv[]){
 		char file_train_set[] = "/home/jhancoc4/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-train.csv";
 		char file_test_set[] = "/home/jhancoc4/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-test.csv";
 
-		FEATURE =  get_num_feature(file_train_set);
+		FEATURE =  get_num_features(file_train_set);
 		NUMBER_OF_CLASSES = 2;
 
 		dataset_train = (float *)malloc(FEATURE * TRAIN_NUM*sizeof(float));
