@@ -124,12 +124,22 @@ void read_csv(float *data, float *label, int row_count, char *filename){
   char *line = NULL;
   int charsRead = 0;
   charsRead = getline (&line, &len, fp);
+  int i = 0;
+  char delim = ","; // assume file separated by commas
+  float curFloat; // holds current floating point number read from file
   while (charsRead > 0){
+    // according to man page, should free buffer read
     free(line);
     line = NULL;
+    char *ptr = strtok(line, delim);
+    while (ptr != NULL){
+      ptr = strtok(NULL, delim);
+      sscanf(ptr, "%f", &curFloat);
+    }
     charsRead = getline (&line, &len, fp);
-    // according to man page, should free buffer read
+    i++;
   }
+  printf("read %d lines\n", i);
   printf("%s", line);
   assert(false);
 }
