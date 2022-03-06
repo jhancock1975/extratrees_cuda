@@ -120,10 +120,10 @@ void read_csv_iris(float *data, float *label, int row_count, char *filename){
 void read_csv(float *data, float *label, int row_count, char *filename){
   FILE *fp = fopen(filename,"r");
   size_t n = 32;
-  char *line = NULL
+  char *line = NULL;
   getline (&line, &n, fp);
   printf("%s", line);
-  assert(false)
+  assert(false);
 }
 
 void readData(float* dataset,float*labels,const char* dataPath,const char*labelPath)
