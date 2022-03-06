@@ -124,8 +124,8 @@ void read_csv(float *data, float *label, int row_count, char *filename){
   char *line = NULL;
   int charsRead = 0;
   chars_read = getline (&line, &len, fp);
-  while (chars_read > 0){
-      chars_read = getline (&line, &len, fp);
+  while (charsRead > 0){
+      charsRead = getline (&line, &len, fp);
       // according to man page, should free buffer read
       free(line);
       line = NULL;
