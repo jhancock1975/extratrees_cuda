@@ -125,10 +125,10 @@ void read_csv(float *data, float *label, int row_count, char *filename){
   int charsRead = 0;
   charsRead = getline (&line, &len, fp);
   while (charsRead > 0){
-      charsRead = getline (&line, &len, fp);
-      // according to man page, should free buffer read
-      free(line);
-      line = NULL;
+    free(line);
+    line = NULL;
+    charsRead = getline (&line, &len, fp);
+    // according to man page, should free buffer read
   }
   printf("%s", line);
   assert(false);
