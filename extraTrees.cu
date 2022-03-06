@@ -193,7 +193,7 @@ void read_csv(float *data, float *label, int n_features, char *filename){
       if (j < n_features){
 	data[n_features*i + j] = curFloat;
       } else {
-	label[i] = curfloat;
+	label[i] = curFloat;
       }
     }
     charsRead = getline (&line, &len, fp);
