@@ -863,15 +863,15 @@ int main(int argc, char * argv[]){
 	}else if(mnist_iris == 2){
 		TRAIN_NUM = 160000;
 		TEST_NUM = 40000;
-		FEATURE =  4;
-		NUMBER_OF_CLASSES = 3;
+		FEATURE =  16;
+		NUMBER_OF_CLASSES = 2;
 
 		dataset_train = (float *)malloc(FEATURE * TRAIN_NUM*sizeof(float));
 		labels_train = (float *)malloc(TRAIN_NUM*sizeof(float));
 		dataset_test = (float *)malloc(FEATURE * TEST_NUM*sizeof(float));
 		labels_test = (float *)malloc(TEST_NUM*sizeof(float));
-		strncpy(file_train_set, "data/iris_train.data",50);
-		strncpy(file_test_set,"data/iris_test.data",50);
+		strncpy(file_train_set, "~/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-test.csv",100);
+		strncpy(file_test_set,"~/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-train.csv",100);
 		read_csv_iris(dataset_train,labels_train,TRAIN_NUM,file_train_set);
 		read_csv_iris(dataset_test,labels_test,TEST_NUM,file_test_set);
 	}
