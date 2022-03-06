@@ -116,6 +116,29 @@ void read_csv_iris(float *data, float *label, int row_count, char *filename){
 	}
 } 
 
+/**
+ * assume csv file fields separated by commas
+ * get number of features, for allocating storage
+ * @param filename: name of csv file to count features in
+ * return: number of features in file
+ */
+int get_num_features(char *filename){
+  FILE *fp = fopen(filename, "r");
+  char *line = NULL, *s = NULL;
+  size_t len = 0;
+  int result = 0;
+  char delim[] = ","; // assume file separated by commas
+  getline(&line, &len, fp);
+  char *ptr = strtok(line, delim);
+  while (ptr != NULL){
+    ptr = strtok(NULL, delim);
+    sscanf(ptr, "%s", &s);
+    result++;
+  }
+  free(line);
+  free(s);
+  return result;
+}
 
 void read_csv(float *data, float *label, int row_count, char *filename){
   FILE *fp = fopen(filename,"r");
@@ -888,16 +911,18 @@ int main(int argc, char * argv[]){
 	}else if(mnist_iris == 2){
 		TRAIN_NUM = 160000;
 		TEST_NUM = 40000;
-		FEATURE =  16;
+		char file_train_set[] = "/home/jhancoc4/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-train.csv";
+		char file_test_set[] = "/home/jhancoc4/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-test.csv";
+
+		FEATURE =  get_num_feature(file_train_set);
 		NUMBER_OF_CLASSES = 2;
 
 		dataset_train = (float *)malloc(FEATURE * TRAIN_NUM*sizeof(float));
 		labels_train = (float *)malloc(TRAIN_NUM*sizeof(float));
 		dataset_test = (float *)malloc(FEATURE * TEST_NUM*sizeof(float));
 		labels_test = (float *)malloc(TEST_NUM*sizeof(float));
-		strncpy(file_train_set, "/home/jhancoc4/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-test.csv",100);
-		strncpy(file_test_set,"/home/jhancoc4/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-train.csv",100);
 		read_csv(dataset_train,labels_train,TRAIN_NUM,file_train_set);
+
 		read_csv(dataset_test,labels_test,TEST_NUM,file_test_set);
 	}
 
