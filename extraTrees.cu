@@ -138,24 +138,63 @@ int get_num_features(char *filename){
   return result;
 }
 
-void read_csv(float *data, float *label, int row_count, char *filename){
+/**
+ * count number of records in csv file
+ * @param filename: name of file to read
+ * @return int, number of records in file
+ */
+int countRecords(char *filename){
   FILE *fp = fopen(filename,"r");
   assert(fp != NULL);
   size_t len = 0;
   char *line = NULL;
   int charsRead = 0;
+  int i = 0;
+
   charsRead = getline (&line, &len, fp);
+  while (charsRead > 0){
+    // according to man page, should free buffer read
+    free(line);
+    line = NULL;
+    charsRead = getline (&line, &len, fp);
+    i++;
+  }
+  return i;
+}
+
+/**
+ * reads CSV file into arrays data and label
+ * @param data: array for features
+ * @param label: array for dependent variable
+ * @param n_features: number of features (columns) in CSV file dataset
+ * @param filename: name of file to read from
+ * @return: void, side effecct data and label arrays are filled
+ */
+void read_csv(float *data, float *label, int n_features, char *filename){
+  FILE *fp = fopen(filename,"r");
+  assert(fp != NULL);
+  size_t len = 0;
+  char *line = NULL;
+  int charsRead = 0;
   int i = 0;
   char delim[] = ","; // assume file separated by commas
   float curFloat; // holds current floating point number read from file
+
+  charsRead = getline (&line, &len, fp);
   while (charsRead > 0){
     // according to man page, should free buffer read
     free(line);
     line = NULL;
     char *ptr = strtok(line, delim);
+    int j = 0;
     while (ptr != NULL){
       ptr = strtok(NULL, delim);
       sscanf(ptr, "%f", &curFloat);
+      if (j < n_features){
+	data[n_features*i + j] = curFloat;
+      } else {
+	label[i] = curfloat;
+      }
     }
     charsRead = getline (&line, &len, fp);
     i++;
@@ -907,20 +946,24 @@ int main(int argc, char * argv[]){
 		read_csv_iris(dataset_test,labels_test,TEST_NUM,file_test_set);
 
 	}else if(mnist_iris == 2){
-		TRAIN_NUM = 160000;
-		TEST_NUM = 40000;
 		char file_train_set[] = "/home/jhancoc4/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-train.csv";
 		char file_test_set[] = "/home/jhancoc4/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-test.csv";
 
+		// compute dimensions of data
+		TRAIN_NUM = countRecords(file_train_set);
+		TEST_NUM = countRecords(file_test_set);
 		FEATURE =  get_num_features(file_train_set);
+		// only binary classification supported currently
 		NUMBER_OF_CLASSES = 2;
 
+		// allocate memory to hold train and test features and labels
 		dataset_train = (float *)malloc(FEATURE * TRAIN_NUM*sizeof(float));
 		labels_train = (float *)malloc(TRAIN_NUM*sizeof(float));
 		dataset_test = (float *)malloc(FEATURE * TEST_NUM*sizeof(float));
 		labels_test = (float *)malloc(TEST_NUM*sizeof(float));
-		read_csv(dataset_train,labels_train,TRAIN_NUM,file_train_set);
 
+		// read data files
+		read_csv(dataset_train,labels_train,TRAIN_NUM,file_train_set);
 		read_csv(dataset_test,labels_test,TEST_NUM,file_test_set);
 	}
 
