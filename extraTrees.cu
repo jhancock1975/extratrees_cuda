@@ -877,8 +877,8 @@ int main(int argc, char * argv[]){
 		labels_train = (float *)malloc(TRAIN_NUM*sizeof(float));
 		dataset_test = (float *)malloc(FEATURE * TEST_NUM*sizeof(float));
 		labels_test = (float *)malloc(TEST_NUM*sizeof(float));
-		strncpy(file_train_set, "~/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-test.csv",100);
-		strncpy(file_test_set,"~/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-train.csv",100);
+		strncpy(file_train_set, "/home/jhancoc4/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-test.csv",100);
+		strncpy(file_test_set,"/home/jhancoc4/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-train.csv",100);
 		read_csv(dataset_train,labels_train,TRAIN_NUM,file_train_set);
 		read_csv(dataset_test,labels_test,TEST_NUM,file_test_set);
 	}
