@@ -28,7 +28,7 @@
 void log(const char *msg){
   time_t tm;
   time(&tm);
-  fprintf(stderr, "%s %s", ctime(&tm), msg);
+  fprintf(stderr, "%s %s", ctime(&tm).pop_back(), msg);
 }
 
 int countNumRows(char *filename)
@@ -964,13 +964,13 @@ int main(int argc, char * argv[]){
 		NUMBER_OF_CLASSES = 2;
 
 		// allocate memory to hold train and test features and labels
-		log("allocate memory for training features");
+		log("allocate memory for training features\n");
 		dataset_train = (float *)malloc(FEATURE * TRAIN_NUM*sizeof(float));
-		log("allocate memory for training labels");
+		log("allocate memory for training labels\n");
 		labels_train = (float *)malloc(TRAIN_NUM*sizeof(float));
-		log("allocate memory for test features");
+		log("allocate memory for test features\n");
 		dataset_test = (float *)malloc(FEATURE * TEST_NUM*sizeof(float));
-		log("allocate memory for test labels");		
+		log("allocate memory for test labels\n");		
 		labels_test = (float *)malloc(TEST_NUM*sizeof(float));
 
 		// read data files
