@@ -28,7 +28,7 @@
 void log(const char *msg){
   time_t tm;
   time(&tm);
-  printf("%s %s", ctime(&tm), msg);
+  fprintf(stderr, "%s %s", ctime(&tm), msg);
 }
 
 int countNumRows(char *filename)
