@@ -25,7 +25,7 @@
 #define MAX(a,b) (((a)>(b))?(a):(b))
 #define gpuErrchk(ans) { gpuAssert((ans), __FILE__, __LINE__); }
 
-void log(char *msg){
+void log(string msg){
   time_t tm;
   time(&tm);
   printf("%s %s", ctime(&tm), msg);
