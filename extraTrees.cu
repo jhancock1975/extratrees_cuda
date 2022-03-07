@@ -7,6 +7,7 @@
 #include <curand.h>
 #include <curand_kernel.h>
 #include <string.h>
+#include <time.h>
 
 #define FEAT_KEY 0
 #define CUT_KEY 1
@@ -23,7 +24,13 @@
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
 #define gpuErrchk(ans) { gpuAssert((ans), __FILE__, __LINE__); }
- 
+
+void log(char *msg){
+  time_t tm;
+  time(&tm);
+  printf("%s %s", ctime(&tm), msg);
+}
+
 int countNumRows(char *filename)
 {
 	FILE *fp;
@@ -943,24 +950,33 @@ int main(int argc, char * argv[]){
 		read_csv_iris(dataset_test,labels_test,TEST_NUM,file_test_set);
 
 	}else if(mnist_iris == 2){
-		char file_train_set[] = "/home/jhancoc4/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-train.csv";
-		char file_test_set[] = "/home/jhancoc4/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-test.csv";
+		char file_train_set[] = "/mnt/beegfs/home/jhancoc4/medicare-data/2019/cb-encoded/part-b-2013-2019-cb-encoded-train.csv";
+		char file_test_set[] = "/mnt/beegfs/home/jhancoc4/medicare-data/2019/cb-encoded/part-b-2013-2019-cb-encoded-test.csv";
 
 		// compute dimensions of data
+		log("counting records in training set\n");
 		TRAIN_NUM = countRecords(file_train_set);
+		log("counting records in test set\n");
 		TEST_NUM = countRecords(file_test_set);
+		log("counting number of features\n");
 		FEATURE =  get_num_features(file_train_set);
 		// only binary classification supported currently
 		NUMBER_OF_CLASSES = 2;
 
 		// allocate memory to hold train and test features and labels
+		log("allocate memory for training features");
 		dataset_train = (float *)malloc(FEATURE * TRAIN_NUM*sizeof(float));
+		log("allocate memory for training labels");
 		labels_train = (float *)malloc(TRAIN_NUM*sizeof(float));
+		log("allocate memory for test features");
 		dataset_test = (float *)malloc(FEATURE * TEST_NUM*sizeof(float));
+		log("allocate memory for test labels");		
 		labels_test = (float *)malloc(TEST_NUM*sizeof(float));
 
 		// read data files
+		log("read training data\n");
 		read_csv(dataset_train,labels_train,TRAIN_NUM,file_train_set);
+		log("read test data\n");
 		read_csv(dataset_test,labels_test,TEST_NUM,file_test_set);
 	}
 
