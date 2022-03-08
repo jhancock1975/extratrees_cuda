@@ -952,8 +952,8 @@ int main(int argc, char * argv[]){
 	}else if(mnist_iris == 2){
 	  //char file_train_set[] = "/mnt/beegfs/home/jhancoc4/medicare-data/2019/cb-encoded/part-b-2013-2019-cb-encoded-train.csv";
 	  //char file_test_set[] = "/mnt/beegfs/home/jhancoc4/medicare-data/2019/cb-encoded/part-b-2013-2019-cb-encoded-test.csv";
-	  char file_train_set[] = "~/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-train.csv";
-	  char file_test_set[] = "~/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-test.csv";
+	  char file_train_set[] = "/mnt/beegfs/home/jhancoc4/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-train.csv";
+	  char file_test_set[] = "/mnt/beegfs/home/jhancoc4/medicare-data/2019-samples/cb-encoded/part-b-2013-2019-cb-encoded-test.csv";
 
 		// compute dimensions of data
 		log("counting records in training set\n");
